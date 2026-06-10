@@ -44,8 +44,14 @@ Parmi les facteurs listés dans le dataset, quels sont les plus susceptibles de 
 
 ### Matrice de corrélation
 
+![Correlation](Ressources/correlation.png)
+
 Les corrélations entre régresseurs sont extrêmement élevées :  
-ADS/LSI (r = 0,946), DAQ/RC (r = 0,953), ADS/RG (r = 0,931), CFP/RG (r = 0,950). Ces valeurs dépassent largement le seuil de 0,70.
+- ADS/LSI (r = 0,946) 
+- DAQ/RC (r = 0,953) 
+- ADS/RG (r = 0,931)
+- CFP/RG (r = 0,950)
+Ces valeurs dépassent largement le seuil de 0,70.
 
 ### Visualisation préliminaire
 
