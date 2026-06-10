@@ -49,13 +49,19 @@ ADS/LSI (r = 0,946), DAQ/RC (r = 0,953), ADS/RG (r = 0,931), CFP/RG (r = 0,950).
 
 ### Visualisation préliminaire
 
+**Visualisation temporelle** : 
 
 ![Heterogeniete_Temporelle](Ressources/hetero_temporelle.png)
-**Visualisation temporelle** : le graphique montre une tendance globale ascendante, suggérant la présence d’effets temporels communs (λₜ ≠ 0). Économiquement, cela peut refléter la croissance macroéconomique générale sur la période ou l’expansion du marché digital.
 
+Le graphique montre une tendance globale ascendante, suggérant la présence d’effets temporels communs (λₜ ≠ 0). Économiquement, cela peut refléter la croissance macroéconomique générale sur la période ou l’expansion du marché digital.
+
+
+
+**Visualisation individuelle** : 
 
 ![Heterogeniete_Individuelle](Ressources/hetero_indivduelle.png)
-**Visualisation individuelle** : chaque point représente le log‑revenu moyen d’une entreprise sur l’ensemble de la période. Un point très éloigné de la moyenne indique une entreprise nettement plus grande ou plus petite que la médiane. Cette dispersion des RGᵢ est la manifestation empirique des effets individuels αᵢ que l’on cherche à modéliser.
+
+Chaque point représente le log‑revenu moyen d’une entreprise sur l’ensemble de la période. Un point très éloigné de la moyenne indique une entreprise nettement plus grande ou plus petite que la médiane. Cette dispersion des RGᵢ est la manifestation empirique des effets individuels αᵢ que l’on cherche à modéliser.
 
 ## Application des modèles économétriques
 
@@ -154,7 +160,7 @@ Ces problèmes ne biaisent pas les coefficients du modèle à effets aléatoires
 
 Cette méthode corrige simultanément les trois anomalies.  
 
-![DK](Ressources/DK2.png)
+![DK](Ressources/DK.png)
 
 → Toutes les variables (sauf OI) deviennent très significatives, et les écarts‑types sont nettement plus petits que ceux du modèle RE classique. Or, une correction robuste a normalement pour effet d’augmenter les écarts‑types. Cette baisse anormale suggère que, dans notre panel court (T=6) et en présence d’une dépendance transversale extrême (test CD : z = 8,71), la méthode de Driscoll‑Kraay sous‑estime la variance. Ces résultats sont donc considérés comme trop optimistes et non fiables.
 
