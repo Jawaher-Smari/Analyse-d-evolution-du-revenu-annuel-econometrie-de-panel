@@ -35,6 +35,8 @@ Parmi les facteurs listés dans le dataset, quels sont les plus susceptibles de 
 
 ### Statistiques descriptives
 
+![statistiques_descriptives](Ressources/stat_descriptives.png)
+
 - **Variable dépendante RG** : dispersion importante (écart‑type = 0,605 en log), ce qui traduit d’importantes différences de taille entre entreprises.
 - **Variable DTS** : écart‑type très proche de 0, ce qui montre que la majorité des entreprises affiche des niveaux de formation faibles.
 - **Variables LSI et RC** : certaines entreprises présentent des niveaux exceptionnellement élevés de difficultés d’intégration ou de résistance au changement.
@@ -47,11 +49,17 @@ ADS/LSI (r = 0,946), DAQ/RC (r = 0,953), ADS/RG (r = 0,931), CFP/RG (r = 0,950).
 
 ### Visualisation préliminaire
 
+
+![Heterogeniete_Temporelle](Ressources/hetero_temporelle.png)
 **Visualisation temporelle** : le graphique montre une tendance globale ascendante, suggérant la présence d’effets temporels communs (λₜ ≠ 0). Économiquement, cela peut refléter la croissance macroéconomique générale sur la période ou l’expansion du marché digital.
 
+
+![Heterogeniete_Individuelle](Ressources/hetero_indivduelle.png)
 **Visualisation individuelle** : chaque point représente le log‑revenu moyen d’une entreprise sur l’ensemble de la période. Un point très éloigné de la moyenne indique une entreprise nettement plus grande ou plus petite que la médiane. Cette dispersion des RGᵢ est la manifestation empirique des effets individuels αᵢ que l’on cherche à modéliser.
 
 ## Application des modèles économétriques
+
+![Comparaison](Ressources/compared_models.png)
 
 ### 1. Modèle MCO empilé (Pooled)
 
@@ -91,19 +99,28 @@ En ce qui concerne le R², chaque modèle présente une spécificité violée, c
 
 ### 1. Test de Fisher
 
-Pour vérifier l’existence d’une hétérogénéité individuelle.  
+Pour vérifier l’existence d’une hétérogénéité individuelle.
+
+![Fisher](Ressources/fisher.png)
+
 → La p‑valeur est pratiquement nulle, donc on rejette H₀ par confirmation de l’existence d’effets individuels et de la non‑efficience d’une simple estimation MCO.  
 **Interprétation économique** : les 100 entreprises ont des niveaux de revenu structurellement différents, et il serait erroné de les traiter comme identiques.
 
 ### 2. Test LM de Breusch‑Pagan
 
 Pour vérifier l’existence d’effets aléatoires significatifs.  
+
+![BP](Ressources/BP.png)
+
 → La p‑valeur est quasi nulle, donc on rejette H₀ : la variance inter‑individuelle est bien différente de zéro.  
 **Interprétation économique** : les entreprises présentent des différences autres que leurs seules variations *within* individuelles.
 
 ### 3. Test de Hausman
 
 La conjonction des deux tests (Fisher et LM) confirme sans ambiguïté la présence d’effets individuels significatifs et la nécessité d’un modèle avec effets.  
+
+![hausman](Ressources/Hausman.png)
+
 → La p‑valeur est égale à 0,064 : on ne rejette pas H₀. Rien ne prouve statistiquement que les effets individuels sont corrélés avec les régresseurs. Le modèle à effets aléatoires (MCG) est donc préféré au modèle *Within*. Même en cas de corrélation modérée entre les régresseurs et αᵢ, la variation *between* est largement supérieure à la variation *within*, ce qui implique l’utilisation d’un modèle prenant en compte les effets inobservables, surtout ceux qui ne varient pas dans le temps (impossible à traiter avec un modèle à effets fixes).  
 **Le modèle retenu est donc le modèle à effets aléatoires.**
 
@@ -111,15 +128,24 @@ La conjonction des deux tests (Fisher et LM) confirme sans ambiguïté la prése
 
 Trois problèmes fréquents peuvent invalider nos résultats : l’autocorrélation (les erreurs sont liées entre elles dans le temps), l’hétéroscédasticité (la variance des erreurs n’est pas constante) et la dépendance transversale (les erreurs de deux entreprises différentes sont liées).
 
-1. **Test de Breusch‑Godfrey (autocorrélation sérielle)**  
+1. **Test de Breusch‑Godfrey (autocorrélation sérielle)**
+
+   ![BG](Ressources/serial_correlation.png)
+   
    La p‑valeur est inférieure à 0,05 : on rejette H₀, il y a bien de l’autocorrélation.  
    → Les résidus d’une année sont liés à ceux de l’année précédente.
 
-2. **Test de Breusch‑Pagan (hétéroscédasticité)**  
+3. **Test de Breusch‑Pagan (hétéroscédasticité)**
+
+   ![BPH](Ressources/BP2.png)
+    
    La p‑valeur est inférieure à 0,05 : on rejette H₀, la variance des résidus n’est pas constante.  
    → Certaines entreprises ont des résidus systématiquement plus grands que d’autres.
 
-3. **Test de Pesaran CD (dépendance transversale)**  
+5. **Test de Pesaran CD (dépendance transversale)**
+
+   ![CD](Ressources/dependance.png)
+   
    La p‑valeur est quasi nulle : on rejette H₀, les résidus des entreprises sont corrélés entre eux à une même date.
 
 Ces problèmes ne biaisent pas les coefficients du modèle à effets aléatoires retenu, mais ils rendent les écarts‑types classiques invalides. Pour obtenir des inférences fiables, on peut appliquer deux méthodes de correction robuste.
@@ -127,12 +153,20 @@ Ces problèmes ne biaisent pas les coefficients du modèle à effets aléatoires
 ### 1. Méthode de Driscoll‑Kraay
 
 Cette méthode corrige simultanément les trois anomalies.  
+
+![DK](Ressources/DK2.png)
+
 → Toutes les variables (sauf OI) deviennent très significatives, et les écarts‑types sont nettement plus petits que ceux du modèle RE classique. Or, une correction robuste a normalement pour effet d’augmenter les écarts‑types. Cette baisse anormale suggère que, dans notre panel court (T=6) et en présence d’une dépendance transversale extrême (test CD : z = 8,71), la méthode de Driscoll‑Kraay sous‑estime la variance. Ces résultats sont donc considérés comme trop optimistes et non fiables.
 
 ### 2. Double clustering (entreprise + année)
 
 Cette méthode permet de corriger en même temps la corrélation temporelle et la dépendance transversale entre les firmes, sans faire d’hypothèse forte sur leur forme.  
+
+![DoubleC](Ressources/double_clustering.png)
+
 → Seules ADS, CFP, DTS et LSI conservent un effet statistiquement significatif. Les variables DAQ, OI et RC ne sont plus significatives. Ces résultats sont cohérents avec l’idée que l’adoption de la data science, la performance financière, la formation spécialisée et la facilité d’intégration des nouvelles approches IT sont les véritables moteurs du revenu annuel, tandis que les autres facteurs n’ont pas d’effet propre.
+
+![RE_Compared](Ressources/compared_re_corrected.png)
 
 En comparant les résultats, la correction par double clustering est retenue comme la méthode la plus fiable pour cette étude.
 
