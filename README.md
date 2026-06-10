@@ -51,6 +51,7 @@ Les corrélations entre régresseurs sont extrêmement élevées :
 - DAQ/RC (r = 0,953) 
 - ADS/RG (r = 0,931)
 - CFP/RG (r = 0,950)
+  
 Ces valeurs dépassent largement le seuil de 0,70.
 
 ### Visualisation préliminaire
